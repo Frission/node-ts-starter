@@ -1,7 +1,7 @@
 {
   "name": "explainer",
   "version": "1.0.0",
-  "description": "A simple and lightweight nodejs boilerplate using typescript",
+  "description": "",
   "main": "build/server.js",
   "scripts": {
     "build": "npx tsc -p .",
@@ -29,7 +29,7 @@
     "typescript",
     "docker"
   ],
-  "author": "Abdou-Raouf ATARMLA",
+  "author": "Fırat Yıldız",
   "license": "ISC",
   "dependencies": {
     "@types/connect-flash": "^0.0.40",
@@ -44,7 +44,6 @@
     "express-list-endpoints": "^7.1.0",
     "express-rate-limit": "^7.3.1",
     "express-session": "^1.18.0",
-    "handlebars": "^4.7.8",
     "helmet": "^7.1.0",
     "ioredis": "^5.4.1",
     "joi": "^17.13.3",

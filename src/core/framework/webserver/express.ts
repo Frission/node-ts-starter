@@ -3,10 +3,9 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
-import initializeViewEngine from "../view-engine"
 import { initializeSessionAndFlash } from "../session-flash"
 import { apiRateLimiter, clientAuthentication, GlobalErrorHandler, NotFoundHandler } from "../../../common/shared"
-import { default as AllRoutes } from "../../../common/global-router"
+import { default as AllRoutes } from "../../../common/globalRouter"
 import { config } from "../../config"
 import { helmetCSPConfig } from "../../constants"
 
@@ -27,9 +26,6 @@ app.disable("x-powered-by") // Disable X-Powered-By header
 
 // Initialize Session and Flash
 initializeSessionAndFlash(app)
-
-// Set view engine
-initializeViewEngine(app)
 
 // Client authentication middleware
 app.use(clientAuthentication)

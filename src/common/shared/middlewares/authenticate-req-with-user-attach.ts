@@ -7,7 +7,6 @@ export const authenticateAndAttachUserContext = (req: Request, res: Response, ne
             return next(authErr)
         }
 
-        // @ts-ignore: Suppress TS error for non-existent property
         const payload = req.payload
 
         if (payload && typeof payload.aud === "string") {

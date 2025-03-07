@@ -13,9 +13,9 @@ const setupRateLimiter = async (): Promise<void> => {
 
         bruteForceLimiter = new RateLimiterMongo({
             storeClient: mongoConn,
-            points: config.bruteForce.freeRetries, // Nombre de tentatives autorisées
-            duration: Math.ceil(config.bruteForce.lifetime / 1000), // Durée de vie en secondes
-            blockDuration: Math.ceil(config.bruteForce.maxWait / 1000), // Durée de blocage en secondes
+            points: config.bruteForce.freeRetries, // Number of attempts allowed
+            duration: Math.ceil(config.bruteForce.lifetime / 1000), // Lifespan in seconds
+            blockDuration: Math.ceil(config.bruteForce.maxWait / 1000), // Blocking duration in seconds
         })
 
         logger.info("Rate limiter configured.")
