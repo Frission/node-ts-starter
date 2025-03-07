@@ -1,3 +1,3 @@
 export * as DB from "./database"
-export * from "./session-flash"
+export * from "./session"
 export * as WebServer from "./webserver"

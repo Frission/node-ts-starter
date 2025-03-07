@@ -4,7 +4,6 @@ import { Schema } from "mongoose"
 import softDeletePlugin from "./soft-delete.plugin"
 import versioningPlugin from "./versioning.plugin"
 import auditTrailPlugin from "./audit-trail.plugin"
-import historyPlugin from "./history.plugin"
 import indexPlugin from "./index.plugin"
 
 type PluginFunction = (schema: Schema, options?: any) => void
@@ -15,7 +14,6 @@ const PluginManager = {
         ["auditTrail", [auditTrailPlugin as PluginFunction]],
         ["versioning", [versioningPlugin as PluginFunction]],
         ["softDelete", [softDeletePlugin as PluginFunction]],
-        ["history", [historyPlugin as PluginFunction]],
         ["index", [indexPlugin as PluginFunction, { fields: { createdAt: 1, updatedAt: 1 } }]],
     ]),
 

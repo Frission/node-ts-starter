@@ -3,7 +3,7 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
-import { initializeSessionAndFlash } from "../session-flash"
+import { initializeSession } from "../session"
 import { apiRateLimiter, clientAuthentication, GlobalErrorHandler, NotFoundHandler } from "../../../common/shared"
 import { default as AllRoutes } from "../../../common/globalRouter"
 import { config } from "../../config"
@@ -24,8 +24,8 @@ app.use(morgan(morganEnv))
 app.use(express.json())
 app.disable("x-powered-by") // Disable X-Powered-By header
 
-// Initialize Session and Flash
-initializeSessionAndFlash(app)
+// Initialize Session
+initializeSession(app)
 
 // Client authentication middleware
 app.use(clientAuthentication)

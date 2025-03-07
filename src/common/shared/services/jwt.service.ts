@@ -7,7 +7,7 @@ import { config } from "../../../core/config"
 const redis = DB.redis
 
 redis.init()
-const client = redis.getClient()
+const redisClient = redis.getClient()
 
 class JwtService {
     private accessTokenSecret: string
@@ -50,7 +50,7 @@ class JwtService {
 
     async isTokenBlacklisted(token: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            client.get(`bl_${token}`, (err: any, result: any) => {
+            redisClient.get(`bl_${token}`, (err: any, result: any) => {
                 if (err) {
                     logger.error(err.message, err)
                     const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
@@ -120,7 +120,7 @@ class JwtService {
                     return reject(errorResponse)
                 }
 
-                client.set(userId, token, "EX", this.redisTokenExpireTime, (redisErr: any) => {
+                redisClient.set(userId, token, "EX", this.redisTokenExpireTime, (redisErr: any) => {
                     if (redisErr) {
                         logger.error(redisErr.message, redisErr)
                         const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
@@ -142,7 +142,7 @@ class JwtService {
 
                 const userId = payload?.aud as string
 
-                client.get(userId, (redisErr: any, result: any) => {
+                redisClient.get(userId, (redisErr: any, result: any) => {
                     if (redisErr) {
                         logger.error(redisErr.message, redisErr)
                         const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
@@ -162,7 +162,7 @@ class JwtService {
 
     blacklistToken(token: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            client.set(`bl_${token}`, "blacklisted", "EX", this.redisBlacklistExpireTime, (redisErr: any) => {
+            redisClient.set(`bl_${token}`, "blacklisted", "EX", this.redisBlacklistExpireTime, (redisErr: any) => {
                 if (redisErr) {
                     logger.error(redisErr.message, redisErr)
                     const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
@@ -175,7 +175,7 @@ class JwtService {
 
     removeFromRedis(key: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            client.del(key, (redisErr: any) => {
+            redisClient.del(key, (redisErr: any) => {
                 if (redisErr) {
                     logger.error(redisErr.message, redisErr)
                     const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
@@ -212,7 +212,7 @@ class JwtService {
 
                 const userId = payload?.aud as string
 
-                client.get(userId, (redisErr: any, result: any) => {
+                redisClient.get(userId, (redisErr: any, result: any) => {
                     if (redisErr) {
                         logger.error(redisErr.message, redisErr)
                         const errorResponse = new ErrorResponse("INTERNAL_SERVER_ERROR", "Internal Server Error")
