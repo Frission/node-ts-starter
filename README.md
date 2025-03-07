@@ -157,7 +157,7 @@ The rate limiter middleware is configured to limit the number of requests to the
 
 ### Brute Force Protection
 
-Brute force protection is implemented using `express-brute` and `express-brute-mongo`. It limits the number of failed login attempts and progressively increases the wait time between attempts after reaching a threshold.
+Brute force protection is implemented using `express-rate-limit` and `rate-limiter-flexible`. It limits the number of failed login attempts and progressively increases the wait time between attempts after reaching a threshold.
 
 ### Hiding Technology Stack
 
