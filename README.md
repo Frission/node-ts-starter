@@ -1,25 +1,18 @@
-# Node.js TypeScript Starter Project
+# Explainer
 
-This project is a simple and lightweight Node.js boilerplate using TypeScript. It includes Docker configurations to run the application in both development and production modes, along with enhanced security features such as rate limiting and brute force protection.
-
----
-
-Check our latest complete boilerplate for NodeTs [Node Typescript Wizard](https://github.com/fless-lab/ntw-init)
+Built with [Node.ts Starter](https://github.com/fless-lab/node-ts-starter)
 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
 2. [Installation](#installation)
 3. [Running the Application](#running-the-application)
-4. [Project Structure](#project-structure)
-5. [Scripts Explanation](#scripts-explanation)
-6. [Environment Variables](#environment-variables)
-7. [Docker Configuration](#docker-configuration)
-8. [Security Features](#security-features)
-9. [Linting and Formatting](#linting-and-formatting)
-10. [Commit Message Guidelines](#commit-message-guidelines)
-11. [Accessing Services](#accessing-services)
-12. [Contributing](#contributing)
+4. [Scripts Explanation](#scripts-explanation)
+5. [Environment Variables](#environment-variables)
+6. [Docker Configuration](#docker-configuration)
+7. [Security Features](#security-features)
+8. [Linting and Formatting](#linting-and-formatting)
+9. [Accessing Services](#accessing-services)
 
 ## Prerequisites
 
@@ -64,99 +57,6 @@ bash bin/start.sh
 To run the application in production mode:
 ```sh
 bash bin/start.sh --prod
-```
-
-## Project Structure
-
-Here is an overview of the project's structure:
-
-```
-/home/raouf/workspaces/personnal/projects/node-ts-starter
-├── .eslintrc.json
-├── .env
-├── .env.example
-├── .eslintignore
-├── .prettierrc
-├── bin
-│   ├── install.sh
-│   └── start.sh
-├── Dockerfile
-├── docker-compose.yaml
-├── package.json
-├── package-lock.json
-├── README.md
-├── src
-│   ├── app
-│   │   ├── controllers
-│   │   │   └── user.controller.ts
-│   │   ├── models
-│   │   │   └── user.model.ts
-│   │   ├── repositories
-│   │   │   ├── base.repo.ts
-│   │   │   └── user.repo.ts
-│   │   ├── routes
-│   │   │   ├── routes.ts
-│   │   │   └── user.routes.ts
-│   │   ├── services
-│   │   │   ├── base.service.ts
-│   │   │   └── user.service.ts
-│   │   ├── templates
-│   │   │   ├── app
-│   │   │   │   └── presentation.html
-│   │   │   └── mail
-│   │   │       └── welcome.html
-│   │   ├── utils
-│   │   │   ├── handlers
-│   │   │   │   ├── error
-│   │   │   │   │   ├── global.ts
-│   │   │   │   │   ├── notfound.ts
-│   │   │   │   │   └── index.ts
-│   │   │   │   ├── res
-│   │   │   │   │   └── index.ts
-│   │   │   │   └── index.ts
-│   │   │   ├── middlewares
-│   │   │   │   ├── bruteforce.ts
-│   │   │   │   ├── client-authentication.ts
-│   │   │   │   ├── rate-limiter.ts
-│   │   │   │   ├── validate.ts
-│   │   │   │   └── index.ts
-│   │   │   ├── types
-│   │   │   │   ├── service-response.ts
-│   │   │   │   ├── user.ts
-│   │   │   │   └── index.ts
-│   │   │   └── validators
-│   │   │       ├── user.ts
-│   │   │       └── index.ts
-│   ├── config
-│   │   └── index.ts
-│   ├── constants
-│   │   └── index.ts
-│   ├── framework
-│   │   ├── database
-│   │   │   ├── mongoose
-│   │   │   │   └── db.ts
-│   │   │   ├── redis
-│   │   │   │   └── redis.ts
-│   │   │   └── index.ts
-│   │   ├── storage
-│   │   │   └── minio
-│   │   │       └── minio.ts
-│   │   ├── webserver
-│   │   │   └── express.ts
-│   │   └── index.ts
-│   ├── helpers
-│   │   ├── db-connection-test.ts
-│   │   ├── index.ts
-│   │   ├── init-services.ts
-│   │   ├── minio-test.ts
-│   │   ├── redis-test.ts
-│   │   ├── string.ts
-│   │   └── time.ts
-│   ├── server.ts
-│   └── index.ts
-├── commitlint.config.js
-├── tsconfig.json
-└── .prettierignore
 ```
 
 ## Scripts Explanation
@@ -295,30 +195,6 @@ To format your code:
 npm run format
 ```
 
-## Commit Message Guidelines
-
-To ensure consistent commit messages, this project uses commitlint with husky to enforce commit message guidelines.
-
-### Commit Message Format
-
-- **build**: Changes that affect the build system or external dependencies
-- **chore**: Miscellaneous changes that don't affect the main codebase (e.g., configuring development tools, setting up project-specific settings)
-- **ci**: Changes to our CI configuration files and scripts
-- **docs**: Documentation only changes
-- **feat**: A new feature
-- **fix**: A bug fix
-- **update**: Update something for a specific use case
-- **perf**: A code change that improves performance
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **style**: Changes that do not affect the meaning of the code (e.g., white-space, formatting, missing semi-colons)
-- **test**: Adding missing tests or correcting existing tests
-- **translation**: Changes related to translations or language localization
-- **sec**: Changes that address security vulnerabilities, implement security measures, or enhance the overall security of the codebase
-
-### Setting Up Commitlint
-
-Commitlint and Husky are already configured and set up to ensure that commit messages follow the specified format before they are committed to the repository.
-
 ## Accessing Services
 
 After running the application, you can access the following services:
@@ -330,11 +206,3 @@ After running the application, you can access the following services:
 - **MinIO WebApp**: Accessible on port `9050`
 - **MailDev SMTP (external)**: Accessible on port `9025`
 - **MailDev WebApp**: Accessible on port `9080`
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/fless-lab/node-ts-starter/issues) if you want to contribute.
-
-Don't forget to give a star if you find this project useful!

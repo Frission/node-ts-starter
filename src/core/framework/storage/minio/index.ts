@@ -1,1 +1,1 @@
-export * as minio from './minio';
+export * as minio from "./minio"

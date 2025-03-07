@@ -1,1 +1,1 @@
-export * as mongo from './db';
+export * as mongo from "./db"

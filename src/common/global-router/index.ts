@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import { AppRoutes, AuthRoutes, OTPRoutes, UserRoutes } from '../../apps';
+import { Router } from "express"
+import { AppRoutes, AuthRoutes, OTPRoutes, UserRoutes } from "../../features"
 
-const router = Router();
+const router = Router()
 
-router.use('/', AppRoutes);
-router.use('/users', UserRoutes);
-router.use('/otp', OTPRoutes);
-router.use('/auth', AuthRoutes);
+router.use("/", AppRoutes)
+router.use("/users", UserRoutes)
+router.use("/otp", OTPRoutes)
+router.use("/auth", AuthRoutes)
 
-export default router;
+export default router
