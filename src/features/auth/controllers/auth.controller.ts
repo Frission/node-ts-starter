@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express"
 import { AuthService } from "../services"
-import { ApiResponse, ErrorResponseType } from "../../../common/shared"
+import { ApiResponse, ErrorResponseType } from "../../../core"
 
 class AuthController {
     static async register(req: Request, res: Response, next: NextFunction): Promise<void> {

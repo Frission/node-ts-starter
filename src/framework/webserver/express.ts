@@ -4,10 +4,15 @@ import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
 import { initializeSession } from "../session"
-import { apiRateLimiter, clientAuthentication, GlobalErrorHandler, NotFoundHandler } from "../../../common/shared"
-import { default as AllRoutes } from "../../../common/globalRouter"
-import { config } from "../../config"
-import { helmetCSPConfig } from "../../constants"
+import {
+    helmetCSPConfig,
+    clientAuthentication,
+    apiRateLimiter,
+    NotFoundHandler,
+    GlobalErrorHandler,
+    config,
+    AllRoutes,
+} from "../../core"
 
 const app = express()
 const morganEnv = config.runningProd ? "combined" : "dev"
@@ -38,6 +43,7 @@ app.use("/api/v1", AllRoutes)
 
 // Error handlers
 app.use(NotFoundHandler)
+app.use(GlobalErrorHandler)
 app.use(GlobalErrorHandler)
 
 export default app

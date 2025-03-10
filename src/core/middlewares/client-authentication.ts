@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
 import { logger } from "../services"
-import { config } from "../../../core/config"
+import { config } from "../config"
 
 export const clientAuthentication = (req: Request, res: Response, next: NextFunction) => {
     const clientToken = req.headers["x-client-token"] as string

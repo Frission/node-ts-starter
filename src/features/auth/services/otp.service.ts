@@ -1,11 +1,11 @@
 import { generateRandomOTP } from "../../../helpers"
-import { ErrorResponse, ErrorResponseType, MailServiceUtilities, SuccessResponseType } from "../../../common/shared"
+import { ErrorResponse, ErrorResponseType, MailServiceUtilities, SuccessResponseType } from "../../../core"
 import { IUserModel, UserService } from "../../users"
 import { OTPModel } from "../models"
 import { IOTPModel, TOTPPurpose } from "../types"
-import { config } from "../../../core/config"
-import { BaseService } from "../../../core/engine"
+import { config } from "../../../core"
 import { OTPRepository } from "../repositories"
+import { BaseService } from "../../../framework/database"
 
 class OTPService extends BaseService<IOTPModel, OTPRepository> {
     constructor() {

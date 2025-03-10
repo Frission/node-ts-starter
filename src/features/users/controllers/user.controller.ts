@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express"
 import { UserService } from "../services"
-import { ApiResponse, ErrorResponseType } from "../../../common/shared"
+import { ApiResponse, ErrorResponseType } from "../../../core"
 
 class UserController {
     static async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {

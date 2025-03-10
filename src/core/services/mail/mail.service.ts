@@ -5,7 +5,7 @@ import path from "path"
 import { ErrorResponse } from "../../utils"
 import { ErrorResponseType, SuccessResponseType } from "../../types"
 import { logger } from ".."
-import { config } from "../../../../core/config"
+import { config } from "../../config"
 
 class MailService {
     private transporter: Transporter

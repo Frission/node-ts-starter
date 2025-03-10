@@ -3,9 +3,9 @@ process.on("uncaughtException", function (err) {
 })
 
 import { initServices } from "./helpers"
-import { WebServer } from "./core/framework"
-import { logger } from "./common/shared"
-import { config } from "./core/config"
+import { logger } from "./core"
+import { config } from "./core"
+import { WebServer } from "./framework"
 
 async function startServer() {
     try {

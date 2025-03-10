@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { authenticateAndAttachUserContext, validate } from "../../../common/shared"
+import { authenticateAndAttachUserContext, validate } from "../../../core"
 import { createUserSchema } from "../validators"
 import { UserController } from "../controllers"
 const router = Router()

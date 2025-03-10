@@ -1,6 +1,6 @@
 # Explainer
 
-Built with [Node.ts Starter](https://github.com/fless-lab/node-ts-starter)
+Based on [Node.ts Starter](https://github.com/fless-lab/node-ts-starter)
 
 ## Table of Contents
 

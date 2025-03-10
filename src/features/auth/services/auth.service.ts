@@ -1,12 +1,6 @@
 import { OTPService } from "."
-import {
-    ErrorResponse,
-    ErrorResponseType,
-    JwtService,
-    MailServiceUtilities,
-    SuccessResponseType,
-} from "../../../common/shared"
-import { config } from "../../../core/config"
+import { ErrorResponse, ErrorResponseType, JwtService, MailServiceUtilities, SuccessResponseType } from "../../../core"
+import { config } from "../../../core"
 import { IUserModel, UserService } from "../../users"
 import { IOTPModel } from "../types"
 

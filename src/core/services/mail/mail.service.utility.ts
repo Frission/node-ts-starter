@@ -1,4 +1,4 @@
-import { config } from "../../../../core/config"
+import { config } from "../../config"
 import { ErrorResponseType, SuccessResponseType } from "../../types"
 import { ErrorResponse } from "../../utils"
 import MailService from "./mail.service"

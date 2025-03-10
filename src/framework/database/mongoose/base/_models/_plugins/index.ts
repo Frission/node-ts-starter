@@ -1,5 +1,3 @@
-// src/core/engine/base/_plugins/PluginManager.ts
-
 import { Schema } from "mongoose"
 import softDeletePlugin from "./soft-delete.plugin"
 import versioningPlugin from "./versioning.plugin"

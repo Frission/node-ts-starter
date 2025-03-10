@@ -1,5 +1,5 @@
 import Redis from "ioredis"
-import { config } from "../../../config"
+import { config } from "../../../core"
 
 let redisClient: Redis | null = null
 
@@ -17,7 +17,7 @@ function init(): void {
         console.info("Client connected to Redis and ready to use...")
     })
 
-    redisClient.on("error", err => {
+    redisClient.on("error", (err) => {
         console.error(err.message)
     })
 

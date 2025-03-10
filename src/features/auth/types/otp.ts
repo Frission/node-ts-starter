@@ -1,6 +1,6 @@
 import { Document, Types } from "mongoose"
-import { config } from "../../../core/config"
-import { IBaseModel } from "../../../core/engine"
+import { config } from "../../../core"
+import { IBaseModel } from "../../../framework/database"
 
 export type TOTPPurpose = keyof typeof config.otp.purposes
 

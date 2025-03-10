@@ -1,10 +1,10 @@
-import { config } from "../../../core/config"
+import { config } from "../../../core"
 import bcrypt from "bcrypt"
-import { ErrorResponse, ErrorResponseType, SuccessResponseType } from "../../../common/shared"
+import { ErrorResponse, ErrorResponseType, SuccessResponseType } from "../../../core"
 import { IUserModel } from "../types"
 import { UserModel } from "../models"
 import { UserRepository } from "../repositories"
-import { BaseService } from "../../../core/engine"
+import { BaseService } from "../../../framework/database"
 
 class UserService extends BaseService<IUserModel, UserRepository> {
     constructor() {
