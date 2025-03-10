@@ -38,13 +38,6 @@ interface Config {
         tokenExpireTime: number
         blacklistExpireTime: number
     }
-    minio: {
-        endpoint: string
-        accessKey: string
-        secretKey: string
-        apiPort: number
-        consolePort: number
-    }
     mail: {
         host: string
         port: number
@@ -103,13 +96,6 @@ export const config: Config = {
         serverPort: parseInt(process.env.REDIS_SERVER_PORT || "9079", 10),
         tokenExpireTime: parseInt(process.env.REDIS_TOKEN_EXPIRE_TIME || "31536000", 10),
         blacklistExpireTime: parseInt(process.env.REDIS_BLACKLIST_EXPIRE_TIME || "2592000", 10),
-    },
-    minio: {
-        endpoint: process.env.MINIO_ENDPOINT || "localhost",
-        accessKey: process.env.MINIO_ACCESS_KEY || "minio-access-key",
-        secretKey: process.env.MINIO_SECRET_KEY || "minio-secret-key",
-        apiPort: parseInt(process.env.MINIO_API_PORT || "9500", 10),
-        consolePort: parseInt(process.env.MINIO_CONSOLE_PORT || "9050", 10),
     },
     mail: {
         host:

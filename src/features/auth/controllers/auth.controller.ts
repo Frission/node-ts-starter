@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request, Response, NextFunction } from "express"
+import { Request, Response } from "express"
 import { AuthService } from "../services"
 import { ApiResponse, ErrorResponseType } from "../../../core"
 
 class AuthController {
-    static async register(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async register(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.register(req.body)
             if (response.success) {
@@ -17,7 +16,7 @@ class AuthController {
         }
     }
 
-    static async verifyAccount(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async verifyAccount(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.verifyAccount(req.body)
             if (response.success) {
@@ -30,7 +29,7 @@ class AuthController {
         }
     }
 
-    static async loginWithPassword(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async loginWithPassword(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.loginWithPassword(req.body)
             if (response.success) {
@@ -43,7 +42,7 @@ class AuthController {
         }
     }
 
-    static async generateLoginOtp(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async generateLoginOtp(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.generateLoginOtp(req.body.email)
             if (response.success) {
@@ -56,7 +55,7 @@ class AuthController {
         }
     }
 
-    static async loginWithOtp(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async loginWithOtp(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.loginWithOtp(req.body)
             if (response.success) {
@@ -69,7 +68,7 @@ class AuthController {
         }
     }
 
-    static async refreshToken(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async refreshToken(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.refresh(req.body.refreshToken)
             if (response.success) {
@@ -82,7 +81,7 @@ class AuthController {
         }
     }
 
-    static async logout(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async logout(req: Request, res: Response): Promise<void> {
         try {
             const { accessToken, refreshToken } = req.body
             const response = await AuthService.logout(accessToken, refreshToken)
@@ -96,7 +95,7 @@ class AuthController {
         }
     }
 
-    static async forgotPassword(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async forgotPassword(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.forgotPassword(req.body.email)
             if (response.success) {
@@ -109,7 +108,7 @@ class AuthController {
         }
     }
 
-    static async resetPassword(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async resetPassword(req: Request, res: Response): Promise<void> {
         try {
             const response = await AuthService.resetPassword(req.body)
             if (response.success) {
@@ -123,4 +122,4 @@ class AuthController {
     }
 }
 
-export default AuthController
+export default new AuthController()

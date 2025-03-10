@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request, Response, NextFunction } from "express"
+import { Request, Response } from "express"
 import { UserService } from "../services"
 import { ApiResponse, ErrorResponseType } from "../../../core"
 
 class UserController {
-    static async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async createUser(req: Request, res: Response): Promise<void> {
         try {
             const response = await UserService.create(req.body)
             if (response.success) {
@@ -17,7 +16,7 @@ class UserController {
         }
     }
 
-    static async getAllUsers(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getAllUsers(req: Request, res: Response): Promise<void> {
         try {
             const response = await UserService.findAll(req.query)
             if (response.success) {
@@ -30,7 +29,7 @@ class UserController {
         }
     }
 
-    static async getUserById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getUserById(req: Request, res: Response): Promise<void> {
         try {
             const userId = req.params.id
             const response = await UserService.findOne({
@@ -47,7 +46,7 @@ class UserController {
         }
     }
 
-    static async getCurrentUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getCurrentUser(req: Request, res: Response): Promise<void> {
         try {
             const userId = (req as any).payload?.aud as string
             const response = await UserService.getProfile(userId)
@@ -63,4 +62,4 @@ class UserController {
     }
 }
 
-export default UserController
+export default new UserController()

@@ -2,6 +2,7 @@ import { Router } from "express"
 import { authenticateAndAttachUserContext, validate } from "../../../core"
 import { createUserSchema } from "../validators"
 import { UserController } from "../controllers"
+
 const router = Router()
 
 router.post("/", authenticateAndAttachUserContext, validate(createUserSchema), UserController.createUser)

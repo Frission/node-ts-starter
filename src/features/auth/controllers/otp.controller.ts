@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request, Response, NextFunction } from "express"
-import { OTPService } from "../services"
+import { Request, Response } from "express"
 import { ApiResponse, ErrorResponseType } from "../../../core"
+import { OTPService } from "../services"
 
 class OTPController {
-    static async generateOTP(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async generateOTP(req: Request, res: Response): Promise<void> {
         try {
             const { email, purpose } = req.body
             const response = await OTPService.generate(email, purpose)
@@ -18,7 +17,7 @@ class OTPController {
         }
     }
 
-    static async validateOTP(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async validateOTP(req: Request, res: Response): Promise<void> {
         try {
             const { email, code, purpose } = req.body
             const response = await OTPService.validate(email, code, purpose)
@@ -33,4 +32,4 @@ class OTPController {
     }
 }
 
-export default OTPController
+export default new OTPController()
