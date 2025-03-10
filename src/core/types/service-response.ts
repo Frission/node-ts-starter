@@ -14,5 +14,7 @@ export type SuccessResponseType<T> = {
 
 export type ErrorResponseType = {
     success: boolean
+    document?: never
+    documents?: never
     error: ErrorResponse
 }

@@ -1,11 +1,10 @@
-import { generateRandomOTP } from "../../../helpers"
-import { ErrorResponse, ErrorResponseType, MailServiceUtilities, SuccessResponseType } from "../../../core"
-import { IUserModel, UserService } from "../../users"
-import { OTPModel } from "../models"
-import { IOTPModel, TOTPPurpose } from "../types"
-import { config } from "../../../core"
-import { OTPRepository } from "../repositories"
+import { config, ErrorResponse, ErrorResponseType, MailServiceUtilities, SuccessResponseType } from "../../../core"
 import { BaseService } from "../../../framework/database"
+import { generateRandomOTP } from "../../../helpers"
+import { UserService } from "../../users"
+import { OTPModel } from "../models"
+import { OTPRepository } from "../repositories"
+import { IOTPModel, TOTPPurpose } from "../types"
 
 class OTPService extends BaseService<IOTPModel, OTPRepository> {
     constructor() {
@@ -15,9 +14,7 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
 
     async generate(email: string, purpose: TOTPPurpose): Promise<SuccessResponseType<IOTPModel> | ErrorResponseType> {
         try {
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
             if (!userResponse.success || !userResponse.document) {
                 // TODO: Customize this kind of error to override BaseService generic not found
                 throw userResponse.error
@@ -61,9 +58,7 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
         purpose: TOTPPurpose,
     ): Promise<SuccessResponseType<null> | ErrorResponseType> {
         try {
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
             }

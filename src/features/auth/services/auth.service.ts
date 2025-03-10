@@ -1,22 +1,26 @@
 import { OTPService } from "."
-import { ErrorResponse, ErrorResponseType, JwtService, MailServiceUtilities, SuccessResponseType } from "../../../core"
-import { config } from "../../../core"
-import { IUserModel, UserService } from "../../users"
+import {
+    config,
+    ErrorResponse,
+    ErrorResponseType,
+    JwtService,
+    MailServiceUtilities,
+    SuccessResponseType,
+} from "../../../core"
+import { UserService } from "../../users"
 import { IOTPModel } from "../types"
 
 class AuthService {
     async register(payload: any): Promise<SuccessResponseType<any> | ErrorResponseType> {
         try {
             const { email } = payload
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (userResponse.success && userResponse.document) {
                 throw new ErrorResponse("UNIQUE_FIELD_ERROR", "The entered email is already registered.")
             }
 
-            const createUserResponse = (await UserService.create(payload)) as SuccessResponseType<IUserModel>
+            const createUserResponse = await UserService.create(payload)
 
             if (!createUserResponse.success || !createUserResponse.document) {
                 throw createUserResponse.error
@@ -27,10 +31,7 @@ class AuthService {
                 firstname: createUserResponse.document.firstname,
             })
 
-            const otpResponse = (await OTPService.generate(
-                email,
-                config.otp.purposes.ACCOUNT_VERIFICATION.code,
-            )) as SuccessResponseType<IOTPModel>
+            const otpResponse = await OTPService.generate(email, config.otp.purposes.ACCOUNT_VERIFICATION.code)
 
             if (!otpResponse.success || !otpResponse.document) {
                 throw otpResponse.error
@@ -57,9 +58,7 @@ class AuthService {
     async verifyAccount(payload: any): Promise<SuccessResponseType<null> | ErrorResponseType> {
         try {
             const { email, code } = payload
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
@@ -99,9 +98,7 @@ class AuthService {
 
     async generateLoginOtp(email: string): Promise<SuccessResponseType<IOTPModel> | ErrorResponseType> {
         try {
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
@@ -138,19 +135,14 @@ class AuthService {
     async loginWithPassword(payload: any): Promise<SuccessResponseType<any> | ErrorResponseType> {
         try {
             const { email, password } = payload
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("UNAUTHORIZED", "Invalid credentials.")
             }
 
             const user = userResponse.document
-            const isValidPasswordResponse = (await UserService.isValidPassword(
-                user.id,
-                password,
-            )) as SuccessResponseType<{ isValid: boolean }>
+            const isValidPasswordResponse = await UserService.isValidPassword(user.id, password)
 
             if (!isValidPasswordResponse.success || !isValidPasswordResponse.document?.isValid) {
                 throw new ErrorResponse("UNAUTHORIZED", "Invalid credentials.")
@@ -188,9 +180,7 @@ class AuthService {
     async loginWithOtp(payload: any): Promise<SuccessResponseType<any> | ErrorResponseType> {
         try {
             const { email, code } = payload
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("UNAUTHORIZED", "Invalid credentials.")
@@ -300,9 +290,7 @@ class AuthService {
                 throw new ErrorResponse("BAD_REQUEST", "Email should be provided.")
             }
 
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
@@ -341,9 +329,7 @@ class AuthService {
             // We suppose a verification about new password and confirmation password have already been done
             const { email, code, newPassword } = payload
 
-            const userResponse = (await UserService.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const userResponse = await UserService.findOne({ email })
 
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")

@@ -18,9 +18,7 @@ class UserService extends BaseService<IUserModel, UserRepository> {
         password: string,
     ): Promise<SuccessResponseType<{ isValid: boolean }> | ErrorResponseType> {
         try {
-            const response = (await this.findOne({
-                _id: userId,
-            })) as SuccessResponseType<IUserModel>
+            const response = await this.findOne({ _id: userId })
             if (!response.success || !response.document) {
                 throw response.error
             }
@@ -43,18 +41,13 @@ class UserService extends BaseService<IUserModel, UserRepository> {
         newPassword: string,
     ): Promise<SuccessResponseType<IUserModel> | ErrorResponseType> {
         try {
-            const response = (await this.findOne({
-                _id: userId,
-            })) as SuccessResponseType<IUserModel>
+            const response = await this.findOne({ _id: userId })
             if (!response.success || !response.document) {
                 throw response.error
             }
 
             const hashedPassword = await bcrypt.hash(newPassword, config.bcrypt.saltRounds)
-            const updateResponse = (await this.update(
-                { _id: userId },
-                { password: hashedPassword },
-            )) as SuccessResponseType<IUserModel>
+            const updateResponse = await this.update({ _id: userId }, { password: hashedPassword })
 
             if (!updateResponse.success) {
                 throw updateResponse.error
@@ -77,9 +70,7 @@ class UserService extends BaseService<IUserModel, UserRepository> {
 
     async isVerified(email: string): Promise<SuccessResponseType<{ verified: boolean }> | ErrorResponseType> {
         try {
-            const response = (await this.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const response = await this.findOne({ email })
             if (!response.success || !response.document) {
                 throw response.error
             }
@@ -101,17 +92,12 @@ class UserService extends BaseService<IUserModel, UserRepository> {
 
     async markAsVerified(email: string): Promise<SuccessResponseType<IUserModel> | ErrorResponseType> {
         try {
-            const response = (await this.findOne({
-                email,
-            })) as SuccessResponseType<IUserModel>
+            const response = await this.findOne({ email })
             if (!response.success || !response.document) {
                 throw response.error
             }
 
-            const updateResponse = (await this.update(
-                { _id: response.document._id },
-                { verified: true },
-            )) as SuccessResponseType<IUserModel>
+            const updateResponse = await this.update({ _id: response.document._id }, { verified: true })
 
             if (!updateResponse.success) {
                 throw updateResponse.error
@@ -138,9 +124,7 @@ class UserService extends BaseService<IUserModel, UserRepository> {
                 throw new ErrorResponse("BAD_REQUEST", "User ID is required.")
             }
 
-            const user = (await this.findOne({
-                _id: userId,
-            })) as SuccessResponseType<IUserModel>
+            const user = await this.findOne({ _id: userId })
 
             if (!user.success || !user.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
