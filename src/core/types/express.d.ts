@@ -1,8 +1,13 @@
-import { JwtPayload } from "jsonwebtoken"
+import type { JwtPayload } from "jsonwebtoken"
 
-declare module "express-serve-static-core" {
-    interface Request {
-        payload?: JwtPayload
-        mongooseOptions?: Record<string, any>
+declare global {
+    namespace Express {
+        export interface Request {
+            payload?: JwtPayload
+            mongooseOptions?: Record<string, any>
+        }
     }
 }
+
+export {}
+
