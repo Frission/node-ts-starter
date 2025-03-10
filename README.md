@@ -115,13 +115,6 @@ MONGO_CLIENT_PORT=9005
 REDIS_HOST=redis
 REDIS_SERVER_PORT=9079
 
-# MinIO
-MINIO_ENDPOINT=minio
-MINIO_ACCESS_KEY=minio-access-key
-MINIO_SECRET_KEY=minio-secret-key
-MINIO_API_PORT=9500
-MINIO_CONSOLE_PORT=9050
-
 # Maildev
 MAILDEV_HOST=maildev
 MAILDEV_PORT=1025
@@ -136,7 +129,6 @@ The Docker configuration allows the application to run in isolated containers. T
 - **app**: The main Node.js application.
 - **mongo**: MongoDB database service.
 - **redis**: Redis caching service.
-- **minio**: MinIO object storage service.
 - **maildev**: Maildev service for testing email sending.
 
 ### Building and Starting Docker Containers
