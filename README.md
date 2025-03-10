@@ -1,4 +1,4 @@
-# Explainer
+# Node.ts Starter
 
 Based on [Node.ts Starter](https://github.com/fless-lab/node-ts-starter)
 
