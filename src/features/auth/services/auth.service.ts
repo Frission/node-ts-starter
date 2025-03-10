@@ -7,11 +7,13 @@ import {
     MailServiceUtilities,
     SuccessResponseType,
 } from "../../../core"
-import { UserService } from "../../users"
+import { IUserModel, UserService } from "../../users"
 import { IOTPModel } from "../types"
 
 class AuthService {
-    async register(payload: any): Promise<SuccessResponseType<any> | ErrorResponseType> {
+    async register(payload: {
+        email: string
+    }): Promise<SuccessResponseType<{ user: IUserModel; otp?: IOTPModel }> | ErrorResponseType> {
         try {
             const { email } = payload
             const userResponse = await UserService.findOne({ email })
@@ -55,7 +57,10 @@ class AuthService {
         }
     }
 
-    async verifyAccount(payload: any): Promise<SuccessResponseType<null> | ErrorResponseType> {
+    async verifyAccount(payload: {
+        email: string
+        code: string
+    }): Promise<SuccessResponseType<null> | ErrorResponseType> {
         try {
             const { email, code } = payload
             const userResponse = await UserService.findOne({ email })

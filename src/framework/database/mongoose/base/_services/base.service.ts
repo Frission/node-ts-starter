@@ -31,8 +31,8 @@ export class BaseService<T extends Document, R extends BaseRepository<T>> {
     private filterQueryFields(query: Record<string, any>): Record<string, any> {
         const filteredQuery: Record<string, any> = {}
         Object.keys(query)
-            .filter((key) => this.allowedFilterFields?.includes(key))
-            .forEach((key) => {
+            .filter(key => this.allowedFilterFields?.includes(key))
+            .forEach(key => {
                 filteredQuery[key] = query[key]
             })
         return filteredQuery
@@ -132,7 +132,7 @@ export class BaseService<T extends Document, R extends BaseRepository<T>> {
             let searchQuery = this.filterQueryFields(query)
             if (searchTerm && this.searchFields?.length) {
                 const regex = new RegExp(escapeRegex(searchTerm), "i")
-                const searchConditions = this.searchFields.map((field) => ({
+                const searchConditions = this.searchFields.map(field => ({
                     [field]: regex,
                 }))
                 searchQuery = { ...searchQuery, $or: searchConditions }

@@ -17,7 +17,7 @@ function init(): void {
         console.info("Client connected to Redis and ready to use...")
     })
 
-    redisClient.on("error", (err) => {
+    redisClient.on("error", err => {
         console.error(err.message)
     })
 
