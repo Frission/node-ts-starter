@@ -81,7 +81,7 @@ The Dockerfile defines how the Docker image is built. It includes steps for sett
 
 ## docker-compose.yml
 
-This file defines the Docker services for the application, including the application itself, MongoDB, Redis, MinIO, and Maildev. It uses environment variables from the `.env` file to configure the services.
+This file defines the Docker services for the application, including the application itself, MongoDB, Redis, and Maildev. It uses environment variables from the `.env` file to configure the services.
 
 ## Environment Variables
 
@@ -194,7 +194,5 @@ After running the application, you can access the following services:
 - **Node.js Application**: [http://localhost:9095](http://localhost:9095)
 - **MongoDB**: Accessible on port `9005`
 - **Redis**: Accessible on port `9079`
-- **MinIO API**: Accessible on port `9500`
-- **MinIO WebApp**: Accessible on port `9050`
 - **MailDev SMTP (external)**: Accessible on port `9025`
 - **MailDev WebApp**: Accessible on port `9080`
