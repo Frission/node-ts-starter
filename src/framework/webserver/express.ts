@@ -1,20 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
-import { initializeSession } from "../session"
-import {
-    helmetCSPConfig,
-    clientAuthentication,
-    apiRateLimiter,
-    NotFoundHandler,
-    GlobalErrorHandler,
-    config,
-    AllRoutes,
-} from "../../core"
+import { initializeSession } from "../session/session"
+import { clientAuthentication } from "../../core/middlewares/client-authentication"
+import { apiRateLimiter } from "../../core/middlewares/rate-limiter"
+import { helmetCSPConfig } from "../../core/constants/constants"
+import { NotFoundHandler, GlobalErrorHandler } from "../../core/utils/handlers/error"
+import { config } from "../../core/config/config"
+import { AllRoutes } from "../../core/routes/routes"
 
-const app = express()
+export const app = express()
 const morganEnv = config.runningProd ? "combined" : "dev"
 
 // Express configuration
@@ -44,6 +40,3 @@ app.use("/api/v1", AllRoutes)
 // Error handlers
 app.use(NotFoundHandler)
 app.use(GlobalErrorHandler)
-app.use(GlobalErrorHandler)
-
-export default app

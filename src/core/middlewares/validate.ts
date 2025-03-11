@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi"
-import { ApiResponse, ErrorResponse } from "../utils"
+import ApiResponse from "../utils/handlers/api-reponse"
+import { ErrorResponse } from "../utils/handlers/error"
 
 export const validate = (schema: ObjectSchema) => {
     return (req: Request, res: Response, next: NextFunction) => {

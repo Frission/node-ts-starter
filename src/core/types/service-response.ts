@@ -1,4 +1,4 @@
-import { ErrorResponse } from "../utils"
+import { ErrorResponse } from "../utils/handlers/error"
 
 export type SuccessResponseType<T> = {
     success: boolean

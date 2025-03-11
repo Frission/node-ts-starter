@@ -1,13 +1,12 @@
 import { Router } from "express"
-import { authenticateAndAttachUserContext, validate } from "../../../core"
-import { createUserSchema } from "../validators"
-import { UserController } from "../controllers"
+import { authenticateAndAttachUserContext } from "../../../core/middlewares/authenticate-req-with-user-attach"
+import { validate } from "../../../core/middlewares/validate"
+import { userController } from "../controllers/user.controller"
+import { createUserSchema } from "../validators/user"
 
-const router = Router()
+export const UserRoutes = Router()
 
-router.post("/", authenticateAndAttachUserContext, validate(createUserSchema), UserController.createUser)
-router.get("/", UserController.getAllUsers)
-router.get("/current", authenticateAndAttachUserContext, UserController.getCurrentUser)
-router.get("/:id", UserController.getUserById)
-
-export default router
+UserRoutes.post("/", authenticateAndAttachUserContext, validate(createUserSchema), userController.createUser)
+UserRoutes.get("/", userController.getAllUsers)
+UserRoutes.get("/current", authenticateAndAttachUserContext, userController.getCurrentUser)
+UserRoutes.get("/:id", userController.getUserById)

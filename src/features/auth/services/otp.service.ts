@@ -1,10 +1,13 @@
-import { config, ErrorResponse, ErrorResponseType, MailServiceUtilities, SuccessResponseType } from "../../../core"
-import { BaseService } from "../../../framework/database"
-import { generateRandomOTP } from "../../../helpers"
-import { UserService } from "../../users"
-import { OTPModel } from "../models"
-import { OTPRepository } from "../repositories"
-import { IOTPModel, TOTPPurpose } from "../types"
+import { config } from "../../../core/config/config"
+import MailServiceUtilities from "../../../core/services/mail/mail.service.utility"
+import { SuccessResponseType, ErrorResponseType } from "../../../core/types/service-response"
+import { ErrorResponse } from "../../../core/utils/handlers/error"
+import { BaseService } from "../../../framework/database/mongoose/base/_services/base.service"
+import { generateRandomOTP } from "../../../helpers/generator"
+import { userService } from "../../users/services/user.service"
+import OTPModel from "../models/otp.model"
+import OTPRepository from "../repositories/otp.repo"
+import { IOTPModel, TOTPPurpose } from "../types/otp"
 
 class OTPService extends BaseService<IOTPModel, OTPRepository> {
     constructor() {
@@ -14,7 +17,7 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
 
     async generate(email: string, purpose: TOTPPurpose): Promise<SuccessResponseType<IOTPModel> | ErrorResponseType> {
         try {
-            const userResponse = await UserService.findOne({ email })
+            const userResponse = await userService.findOne({ email })
             if (!userResponse.success || !userResponse.document) {
                 // TODO: Customize this kind of error to override BaseService generic not found
                 throw userResponse.error
@@ -33,7 +36,7 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
             const mailResponse = await MailServiceUtilities.sendOtp({
                 to: user.email,
                 code: otp.code,
-                purpose,
+                purpose: purpose.toString(),
             })
 
             if (!mailResponse.success) {
@@ -58,7 +61,7 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
         purpose: TOTPPurpose,
     ): Promise<SuccessResponseType<null> | ErrorResponseType> {
         try {
-            const userResponse = await UserService.findOne({ email })
+            const userResponse = await userService.findOne({ email })
             if (!userResponse.success || !userResponse.document) {
                 throw new ErrorResponse("NOT_FOUND_ERROR", "User not found.")
             }
@@ -92,4 +95,4 @@ class OTPService extends BaseService<IOTPModel, OTPRepository> {
     }
 }
 
-export default new OTPService()
+export const otpService = new OTPService()

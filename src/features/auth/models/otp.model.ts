@@ -1,8 +1,8 @@
-import { IOTPModel } from "../types"
-import { config } from "../../../core"
 import { Schema } from "mongoose"
-import { attemptLimitingPlugin } from "./_plugins"
-import { BaseModel, createBaseSchema } from "../../../framework/database"
+import { attemptLimitingPlugin } from "./_plugins/attemp-limiting.plugin"
+import { config } from "../../../core/config/config"
+import { IOTPModel } from "../types/otp"
+import { BaseModel, createBaseSchema } from "../../../framework/database/mongoose/base/_models/base.model"
 
 const OTP_MODEL_NAME = "OTP"
 

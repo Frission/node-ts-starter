@@ -1,5 +1,5 @@
 import { Schema, Document, model as mongooseModel, Model } from "mongoose"
-import PluginManager from "./_plugins"
+import PluginManager from "./_plugins/plugin-manager"
 
 interface IBaseModel extends Document {
     deletedAt?: Date | null

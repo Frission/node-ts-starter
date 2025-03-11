@@ -1,10 +1,10 @@
 import JWT, { SignOptions } from "jsonwebtoken"
-import { ApiResponse, ErrorResponse } from "../utils"
 import { logger } from "./logger.service"
-import { DB } from "../../framework"
-import { config } from "../config"
-
-const redis = DB.redis
+import { config } from "../config/config"
+import type { Request, Response } from "express"
+import { ErrorResponse } from "../utils/handlers/error"
+import ApiResponse from "../utils/handlers/api-reponse"
+import { redis } from "../../framework/database/redis/redis"
 
 redis.init()
 const redisClient = redis.getClient()
@@ -61,7 +61,7 @@ class JwtService {
         })
     }
 
-    verifyAccessToken(req: any, res: any, next: any): void {
+    verifyAccessToken(req: Request, res: Response, next: any): void {
         if (!req.headers["authorization"]) {
             const errorResponse = new ErrorResponse("UNAUTHORIZED", "Unauthorized", ["No authorization header"])
             return ApiResponse.error(res, {
@@ -231,4 +231,4 @@ class JwtService {
     }
 }
 
-export default new JwtService()
+export const jwtService = new JwtService()

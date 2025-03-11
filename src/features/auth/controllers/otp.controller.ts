@@ -1,12 +1,13 @@
 import { Request, Response } from "express"
-import { ApiResponse, ErrorResponseType } from "../../../core"
-import { OTPService } from "../services"
+import { ErrorResponseType } from "../../../core/types/service-response"
+import ApiResponse from "../../../core/utils/handlers/api-reponse"
+import { otpService } from "../services/otp.service"
 
 class OTPController {
     async generateOTP(req: Request, res: Response): Promise<void> {
         try {
             const { email, purpose } = req.body
-            const response = await OTPService.generate(email, purpose)
+            const response = await otpService.generate(email, purpose)
             if (response.success) {
                 ApiResponse.success(res, response, 201)
             } else {
@@ -20,7 +21,7 @@ class OTPController {
     async validateOTP(req: Request, res: Response): Promise<void> {
         try {
             const { email, code, purpose } = req.body
-            const response = await OTPService.validate(email, code, purpose)
+            const response = await otpService.validate(email, code, purpose)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -32,4 +33,4 @@ class OTPController {
     }
 }
 
-export default new OTPController()
+export const otpController = new OTPController()

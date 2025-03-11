@@ -1,52 +1,52 @@
 import Redis from "ioredis"
-import { config } from "../../../core"
+import { config } from "../../../core/config/config"
 
-let redisClient: Redis | null = null
+let client: Redis | null = null
 
 function init(): void {
-    redisClient = new Redis({
+    client = new Redis({
         port: config.redis.port, // Redis port from config
         host: config.redis.host, // Redis host from config
     })
 
-    redisClient.on("connect", () => {
+    client.on("connect", () => {
         console.info("Client connected to Redis...")
     })
 
-    redisClient.on("ready", () => {
+    client.on("ready", () => {
         console.info("Client connected to Redis and ready to use...")
     })
 
-    redisClient.on("error", err => {
+    client.on("error", err => {
         console.error(err.message)
     })
 
-    redisClient.on("end", () => {
+    client.on("end", () => {
         console.warn("Client disconnected from Redis")
     })
 
     process.on("SIGINT", () => {
         console.log("On client quit")
-        if (redisClient) {
-            redisClient.quit()
+        if (client) {
+            client.quit()
         }
     })
 }
 
 function getClient(): Redis {
-    if (!redisClient) {
+    if (!client) {
         throw new Error("Redis client not initialized. Call init() first.")
     }
-    return redisClient
+    return client
 }
 
 async function close(): Promise<void> {
-    if (redisClient) {
-        await redisClient.quit()
+    if (client) {
+        await client.quit()
         console.warn("Redis connection is disconnected.")
     } else {
         console.warn("No Redis connection found to close.")
     }
 }
 
-export { init, getClient, close }
+export const redis = { init, getClient, close }

@@ -1,6 +1,6 @@
 import { Application } from "express"
 import session from "express-session"
-import { config } from "../../core"
+import { config } from "../../core/config/config"
 
 export const initializeSession = (app: Application): void => {
     app.use(

@@ -1,9 +1,8 @@
 import { CallbackError } from "mongoose"
 import bcrypt from "bcrypt"
-import { IUserModel } from "../types"
-
-import { config } from "../../../core"
-import { BaseModel, createBaseSchema } from "../../../framework/database"
+import { config } from "../../../core/config/config"
+import { IUserModel } from "../types/user"
+import { createBaseSchema, BaseModel } from "../../../framework/database/mongoose/base/_models/base.model"
 
 const USER_MODEL_NAME = "User"
 

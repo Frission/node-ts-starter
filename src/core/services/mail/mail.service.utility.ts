@@ -1,6 +1,6 @@
-import { config } from "../../config"
-import { ErrorResponseType, SuccessResponseType } from "../../types"
-import { ErrorResponse } from "../../utils"
+import { config } from "../../config/config"
+import { SuccessResponseType, ErrorResponseType } from "../../types/service-response"
+import { ErrorResponse } from "../../utils/handlers/error"
 import MailService from "./mail.service"
 
 class MailServiceUtilities {

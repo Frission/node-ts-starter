@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express"
-import { JwtService, AsyncStorageService, logger } from "../services"
+import { AsyncStorageService } from "../services/async-localstorage.service"
+import { logger } from "../services/logger.service"
+import { jwtService } from "../services/jwt.service"
 
 export const authenticateAndAttachUserContext = (req: Request, res: Response, next: NextFunction) => {
-    JwtService.verifyAccessToken(req, res, (authErr: any) => {
+    jwtService.verifyAccessToken(req, res, (authErr: any) => {
         if (authErr) {
             return next(authErr)
         }

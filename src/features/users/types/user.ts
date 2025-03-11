@@ -1,7 +1,7 @@
 // src/apps/users/types/user.ts
 
 import { Document } from "mongoose"
-import { IBaseModel } from "../../../framework/database"
+import { IBaseModel } from "../../../framework/database/mongoose/base/_models/base.model"
 
 export type TUserRole = "admin" | "user" | "guest"
 

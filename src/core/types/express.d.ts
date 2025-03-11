@@ -1,4 +1,5 @@
 import type { JwtPayload } from "jsonwebtoken"
+import type * as express from "express"
 
 declare global {
     namespace Express {
@@ -10,4 +11,3 @@ declare global {
 }
 
 export {}
-

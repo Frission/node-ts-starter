@@ -1,9 +1,7 @@
 import { Router } from "express"
-import { OTPController } from "../controllers"
+import { otpController } from "../controllers/otp.controller"
 
-const router = Router()
+export const OTPRoutes = Router()
 
-router.post("/generate", OTPController.generateOTP)
-router.post("/validate", OTPController.validateOTP)
-
-export default router
+OTPRoutes.post("/generate", otpController.generateOTP)
+OTPRoutes.post("/validate", otpController.validateOTP)

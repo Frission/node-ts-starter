@@ -1,9 +1,8 @@
-import { logger } from "../core"
-import { DB } from "../framework"
+import { logger } from "../core/services/logger.service"
+import { redis } from "../framework/database/redis/redis"
 
 async function testRedisConnection(): Promise<void> {
     try {
-        const redis = DB.redis
         redis.init()
         const client = redis.getClient()
         await client.ping()

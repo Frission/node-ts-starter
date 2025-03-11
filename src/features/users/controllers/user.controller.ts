@@ -1,11 +1,12 @@
 import { Request, Response } from "express"
-import { UserService } from "../services"
-import { ApiResponse, ErrorResponseType } from "../../../core"
+import { ErrorResponseType } from "../../../core/types/service-response"
+import ApiResponse from "../../../core/utils/handlers/api-reponse"
+import { userService } from "../services/user.service"
 
 class UserController {
     async createUser(req: Request, res: Response): Promise<void> {
         try {
-            const response = await UserService.create(req.body)
+            const response = await userService.create(req.body)
             if (response.success) {
                 ApiResponse.success(res, response, 201)
             } else {
@@ -18,7 +19,7 @@ class UserController {
 
     async getAllUsers(req: Request, res: Response): Promise<void> {
         try {
-            const response = await UserService.findAll(req.query)
+            const response = await userService.findAll(req.query)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -32,7 +33,7 @@ class UserController {
     async getUserById(req: Request, res: Response): Promise<void> {
         try {
             const userId = req.params.id
-            const response = await UserService.findOne({
+            const response = await userService.findOne({
                 _id: userId,
             })
 
@@ -48,8 +49,8 @@ class UserController {
 
     async getCurrentUser(req: Request, res: Response): Promise<void> {
         try {
-            const userId = (req as any).payload?.aud as string
-            const response = await UserService.getProfile(userId)
+            const userId = req.payload?.aud as string
+            const response = await userService.getProfile(userId)
 
             if (response.success) {
                 ApiResponse.success(res, response)
@@ -62,4 +63,4 @@ class UserController {
     }
 }
 
-export default new UserController()
+export const userController = new UserController()

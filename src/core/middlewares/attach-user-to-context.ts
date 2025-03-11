@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express"
-import { AsyncStorageService, logger } from "../services"
+import { AsyncStorageService } from "../services/async-localstorage.service"
+import { logger } from "../services/logger.service"
 
 export const attachUserToContext = (req: Request, res: Response, next: NextFunction) => {
     const asyncStorage = AsyncStorageService.getInstance()

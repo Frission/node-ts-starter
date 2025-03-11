@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express"
-import { JwtService } from "../services"
+import { jwtService } from "../services/jwt.service"
 
 const authenticateRequest = (req: Request, res: Response, next: NextFunction) => {
-    JwtService.verifyAccessToken(req, res, next)
+    jwtService.verifyAccessToken(req, res, next)
 }
 
 export default authenticateRequest

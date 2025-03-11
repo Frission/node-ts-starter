@@ -1,34 +1,32 @@
 import { Router } from "express"
-
-import { bruteForceMiddleware, validate } from "../../../core"
-import { AuthController } from "../controllers"
+import bruteForceMiddleware from "../../../core/middlewares/bruteforce"
+import { validate } from "../../../core/middlewares/validate"
+import { authController } from "../controllers/auth.controller"
 import {
-    forgotPasswordSchema,
-    generateLoginOtpSchema,
-    loginWithOtpSchema,
-    loginWithPasswordSchema,
-    logoutSchema,
-    refreshSchema,
     registerSchema,
-    resetPasswordSchema,
     verifyAccountSchema,
-} from "../validators"
+    generateLoginOtpSchema,
+    loginWithPasswordSchema,
+    loginWithOtpSchema,
+    forgotPasswordSchema,
+    resetPasswordSchema,
+    refreshSchema,
+    logoutSchema,
+} from "../validators/auth"
 
-const router = Router()
+export const AuthRoutes = Router()
 
-router.post("/register", validate(registerSchema), AuthController.register)
-router.post("/verify-account", validate(verifyAccountSchema), AuthController.verifyAccount)
-router.post("/generate-login-otp", validate(generateLoginOtpSchema), AuthController.generateLoginOtp)
-router.post(
+AuthRoutes.post("/register", validate(registerSchema), authController.register)
+AuthRoutes.post("/verify-account", validate(verifyAccountSchema), authController.verifyAccount)
+AuthRoutes.post("/generate-login-otp", validate(generateLoginOtpSchema), authController.generateLoginOtp)
+AuthRoutes.post(
     "/login-with-password",
     validate(loginWithPasswordSchema),
     bruteForceMiddleware,
-    AuthController.loginWithPassword,
+    authController.loginWithPassword,
 )
-router.post("/login-with-otp", validate(loginWithOtpSchema), bruteForceMiddleware, AuthController.loginWithOtp)
-router.post("/forgot-password", validate(forgotPasswordSchema), AuthController.forgotPassword)
-router.patch("/reset-password", validate(resetPasswordSchema), AuthController.resetPassword)
-router.post("/refresh", validate(refreshSchema), AuthController.refreshToken)
-router.post("/logout", validate(logoutSchema), AuthController.logout)
-
-export default router
+AuthRoutes.post("/login-with-otp", validate(loginWithOtpSchema), bruteForceMiddleware, authController.loginWithOtp)
+AuthRoutes.post("/forgot-password", validate(forgotPasswordSchema), authController.forgotPassword)
+AuthRoutes.patch("/reset-password", validate(resetPasswordSchema), authController.resetPassword)
+AuthRoutes.post("/refresh", validate(refreshSchema), authController.refreshToken)
+AuthRoutes.post("/logout", validate(logoutSchema), authController.logout)

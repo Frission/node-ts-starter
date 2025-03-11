@@ -1,10 +1,11 @@
-import { config } from "../../../core"
 import bcrypt from "bcrypt"
-import { ErrorResponse, ErrorResponseType, SuccessResponseType } from "../../../core"
-import { IUserModel } from "../types"
-import { UserModel } from "../models"
-import { UserRepository } from "../repositories"
-import { BaseService } from "../../../framework/database"
+import { SuccessResponseType, ErrorResponseType } from "../../../core/types/service-response"
+import { ErrorResponse } from "../../../core/utils/handlers/error"
+import { config } from "../../../core/config/config"
+import UserModel from "../models/user.model"
+import UserRepository from "../repositories/user.repo"
+import { IUserModel } from "../types/user"
+import { BaseService } from "../../../framework/database/mongoose/base/_services/base.service"
 
 class UserService extends BaseService<IUserModel, UserRepository> {
     constructor() {
@@ -153,4 +154,4 @@ class UserService extends BaseService<IUserModel, UserRepository> {
     }
 }
 
-export default new UserService()
+export const userService = new UserService()

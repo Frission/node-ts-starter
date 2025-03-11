@@ -1,5 +1,6 @@
 import { Schema } from "mongoose"
-import { AsyncStorageService, logger } from "../../../../../../core"
+import { AsyncStorageService } from "../../../../../../core/services/async-localstorage.service"
+import { logger } from "../../../../../../core/services/logger.service"
 
 const auditTrailPlugin = (schema: Schema) => {
     schema.pre("save", function (next) {

@@ -1,11 +1,12 @@
 import { Request, Response } from "express"
-import { AuthService } from "../services"
-import { ApiResponse, ErrorResponseType } from "../../../core"
+import { ErrorResponseType } from "../../../core/types/service-response"
+import ApiResponse from "../../../core/utils/handlers/api-reponse"
+import { authService } from "../services/auth.service"
 
 class AuthController {
     async register(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.register(req.body)
+            const response = await authService.register(req.body)
             if (response.success) {
                 ApiResponse.success(res, response, 201)
             } else {
@@ -18,7 +19,7 @@ class AuthController {
 
     async verifyAccount(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.verifyAccount(req.body)
+            const response = await authService.verifyAccount(req.body)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -31,7 +32,7 @@ class AuthController {
 
     async loginWithPassword(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.loginWithPassword(req.body)
+            const response = await authService.loginWithPassword(req.body)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -44,7 +45,7 @@ class AuthController {
 
     async generateLoginOtp(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.generateLoginOtp(req.body.email)
+            const response = await authService.generateLoginOtp(req.body.email)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -57,7 +58,7 @@ class AuthController {
 
     async loginWithOtp(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.loginWithOtp(req.body)
+            const response = await authService.loginWithOtp(req.body)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -70,7 +71,7 @@ class AuthController {
 
     async refreshToken(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.refresh(req.body.refreshToken)
+            const response = await authService.refresh(req.body.refreshToken)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -84,7 +85,7 @@ class AuthController {
     async logout(req: Request, res: Response): Promise<void> {
         try {
             const { accessToken, refreshToken } = req.body
-            const response = await AuthService.logout(accessToken, refreshToken)
+            const response = await authService.logout(accessToken, refreshToken)
             if (response.success) {
                 ApiResponse.success(res, response, 202)
             } else {
@@ -97,7 +98,7 @@ class AuthController {
 
     async forgotPassword(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.forgotPassword(req.body.email)
+            const response = await authService.forgotPassword(req.body.email)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -110,7 +111,7 @@ class AuthController {
 
     async resetPassword(req: Request, res: Response): Promise<void> {
         try {
-            const response = await AuthService.resetPassword(req.body)
+            const response = await authService.resetPassword(req.body)
             if (response.success) {
                 ApiResponse.success(res, response)
             } else {
@@ -122,4 +123,4 @@ class AuthController {
     }
 }
 
-export default new AuthController()
+export const authController = new AuthController()

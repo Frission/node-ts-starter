@@ -1,5 +1,5 @@
 import mongoose, { Connection } from "mongoose"
-import { config } from "../../../core"
+import { config } from "../../../core/config/config"
 
 let mongoClient: Connection | null = null
 
@@ -52,4 +52,4 @@ async function close(): Promise<void> {
     }
 }
 
-export { init, getClient, close }
+export const mongo = { init, getClient, close }

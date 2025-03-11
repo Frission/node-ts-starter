@@ -1,15 +1,15 @@
 import { RateLimiterMongo } from "rate-limiter-flexible"
 import { Request, Response, NextFunction } from "express"
-import { logger } from "../services"
-import { DB } from "../../framework"
-import { config } from "../config"
+import { config } from "../config/config"
+import { logger } from "../services/logger.service"
+import { mongo } from "../../framework/database/mongoose/db"
 
 let bruteForceLimiter: RateLimiterMongo | undefined
 
 const setupRateLimiter = async (): Promise<void> => {
     try {
-        await DB.mongo.init(config.db.uri, config.db.name)
-        const mongoConn = await DB.mongo.getClient()
+        await mongo.init(config.db.uri, config.db.name)
+        const mongoConn = await mongo.getClient()
 
         bruteForceLimiter = new RateLimiterMongo({
             storeClient: mongoConn,
